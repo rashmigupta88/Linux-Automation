@@ -1,0 +1,20 @@
+- name: ensure NTP Package is Installed
+  yum:
+    name: ntp
+    state: latest
+- name: Copy over the NTP configuration
+  template:
+    src: /root/post-install-config/roles/common/templates/ntp.conf.j2
+    dest: /etc/ntp.conf
+  notify:
+  - restart ntp service
+  tags: ntp
+- name: Make sure NTP is started up
+  service:
+    name: ntpd
+    state: started
+    enabled: yes
+  tags: ntp
+#handlers:
+##- name: restart ntpd
+##  service: name=ntpd state=restarted

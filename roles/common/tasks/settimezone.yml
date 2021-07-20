@@ -1,0 +1,2 @@
+  - name: settimezone on "{{ ansible_fqdn }}"
+    command: 'timedatectl set-timezone Europe/Paris'

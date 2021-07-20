@@ -1,0 +1,40 @@
+  - name: check if shinken is installed or not
+    shell: "rpm -qa | grep -i shinken"
+    register: result
+    failed_when: false
+    changed_when: false
+    no_log: True
+
+  - name: check existing rpm version
+    debug: msg={{ result.stdout_lines }}
+
+  - name: install the nrpe rpm from a remote repo to client machine
+    yum:
+      name: http://{{UMS_IP}}/Catalog/MONITORING/Shinken/{{ nrpe_version }}
+      state: present
+
+  - name: install uploaded rpm
+    command: rpm -Uvh --replacefiles http://{{UMS_IP}}/Catalog/MONITORING/Shinken/{{ shinken_version }}
+#    when: result.stdout_lines != "shinken_version"
+    failed_when: false
+    changed_when: false
+    no_log: True
+
+  - name: check if shinken is installed or not
+    shell: "rpm -qa | grep -i shinken"
+    register: out
+    failed_when: false
+    changed_when: false
+    no_log: True
+
+  - name: confirm existing rpm version installed
+    debug: msg={{ out.stdout_lines }}
+
+  - name: check if nrpe process is running successfully
+    shell: "ps -ef | grep -i nrpe"
+    register: result
+    failed_when: false
+    changed_when: false
+
+  - name: confirm if nrpe process is running
+    debug: msg={{ result.stdout_lines }}

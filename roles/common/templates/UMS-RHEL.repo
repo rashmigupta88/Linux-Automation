@@ -1,0 +1,6 @@
+[ums_repository]
+name=UMS Repository
+baseurl=http://{{UMS_IP}}/Catalog/OS/RHEL/7/7.4_64bits/YumRepository/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release

@@ -1,0 +1,8 @@
+---
+# tasks file for common
+- include: os-based-repo.yml
+- include: sethostname.yml
+- include: settimezone.yml
+- include: shinken-install.yml
+- include: bladelogic-install.yml
+- include: ntp-config.yml

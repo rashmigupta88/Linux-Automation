@@ -1,0 +1,6 @@
+---
+# defaults file for common
+rscd: OBS_RSCD89-SP1-LIN64_V1.tar.gz
+nrpe_version: nrpe-ocb.3.2.0.el7.x86_64.rpm
+shinken_version: shinken-agent-configuration_1.7.23.rpm
+#

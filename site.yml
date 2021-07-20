@@ -1,0 +1,8 @@
+---
+# file: roles/common/tasks/main.yml
+- hosts: all
+  ignore_errors: yes
+  roles:
+      - common
+     # - physical
+     # - virtual

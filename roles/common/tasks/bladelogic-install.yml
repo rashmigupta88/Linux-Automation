@@ -1,0 +1,30 @@
+  - name: check if bladelogic is installed or not
+    shell: "netstat -plunt | grep -i rscd"
+    register: result
+    failed_when: false
+    changed_when: false
+
+  - name: check if rscd process is runing already
+    debug: msg={{ result.stdout }}
+
+  - name: remove the OLD tar from /tmp
+    shell: "cd /tmp; rm -rf blagent;rm -rf OBS_RSCD*"
+    when: result.rc == 1
+
+  - name: copy the bladelogic tar to client machine
+    copy:
+      src: /root/playbooks/files/{{ rscd }}
+      dest: /tmp/{{ rscd }}
+      mode: '0655'
+    when: result.rc == 1
+  - name: install uploaded rpm
+    shell: 'tar -xvf /tmp/{{ rscd }} -C /tmp;cd /tmp/blagent;sh ./delete_bladelogic_agent.sh -versions;sh ./delete_bladelogic_agent.sh -version;sh ./install_bladelogic_agent.sh -p SHARED'
+    when: result.rc == 1
+  - name: check if rscd process is running successfully
+    shell: "ps -ef | grep -i rscd"
+    register: rscd
+    failed_when: false
+    changed_when: false
+
+  - name: confirm output if rscd process is running
+    debug: msg={{ rscd.stdout }}

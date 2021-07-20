@@ -1,0 +1,8 @@
+---
+  - name: update hostname using template
+    template:
+      src: /root/post-install-config/roles/common/templates/hostname.j2
+      dest: /etc/hostname
+      owner: root
+      group: root
+      mode: '0644'
