@@ -1,0 +1,59 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+## [webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+## 192.168.1.110
+
+
+
+####This Part is use for Configuring Physical Machines, please set exact name of variables in your playbooks and templates as defined here######
+
+[new-physical]
+x.x.x.x hostname=xx GATEWAY=192.168.229.x eth3=10.22.0.x pfeth3=26 vlan401=10.50.9.x pfvlan401=24 vlan402=10.50.10.x pfvlan402=24 vlan193=172.21.4.x pfvlan193=28 vlan126=172.21.4.x pfvlan126=29 UMS_IP=x.x.x.x
+
+####This Part is use for Configuring Virtual Machines, please set exact name of variables in your playbooks and templates as defined here#######
+
+[new-virtual]
+x.x.x.x hostname=xx GATEWAY=192.168.229.x eth1=10.50.11.x pfeth1=x UMS_IP=x.x.x.x
+
+# If you have multiple hosts following a pattern you can specify
+# them like this:
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+## 
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+
+
